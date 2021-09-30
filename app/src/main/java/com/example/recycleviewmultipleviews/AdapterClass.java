@@ -17,6 +17,7 @@ import java.util.List;
 import static com.example.recycleviewmultipleviews.ItemClass.LayoutOne;
 import static com.example.recycleviewmultipleviews.ItemClass.LayoutTwo;
 import static com.example.recycleviewmultipleviews.ItemClass.LayoutThree;
+import static com.example.recycleviewmultipleviews.ItemClass.LayoutFour;
 
 public class AdapterClass extends RecyclerView.Adapter {
 
@@ -43,6 +44,8 @@ public class AdapterClass extends RecyclerView.Adapter {
                 return LayoutTwo;
             case 2:
                 return LayoutThree;
+            case 3:
+                return LayoutFour;
             default:
                 return -1;
         }
@@ -137,6 +140,29 @@ public class AdapterClass extends RecyclerView.Adapter {
         }
     }
 
+    class LayoutFourViewHolder
+            extends RecyclerView.ViewHolder {
+
+        private ImageView icon;
+        private TextView text_one;
+        private ConstraintLayout constraintLayout;
+
+        public LayoutFourViewHolder(@NonNull View itemView)
+        {
+            super(itemView);
+            icon = itemView.findViewById(R.id.media_image);
+            text_one = itemView.findViewById(R.id.textView);
+
+            constraintLayout
+                    = itemView.findViewById(R.id.constraintlayout4);
+        }
+
+        private void setViews(int image, String textOne)
+        {
+            icon.setImageResource(image);
+            text_one.setText(textOne);
+        }
+    }
     // In the onCreateViewHolder, inflate the
     // xml layout as per the viewType.
     // This method returns either of the
@@ -169,6 +195,13 @@ public class AdapterClass extends RecyclerView.Adapter {
                         .inflate(R.layout.layout_three, parent,
                                 false);
                 return new LayoutThreeViewHolder(layoutThree);
+
+            case LayoutFour:
+                View layoutFour
+                        = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.layout_four, parent,
+                                false);
+                return new LayoutFourViewHolder(layoutFour);
             default:
                 return null;
         }
@@ -304,6 +337,36 @@ public class AdapterClass extends RecyclerView.Adapter {
                         });
 
                 break;
+
+            case LayoutFour:
+                int image4
+                        = itemClassList.get(position).geticon();
+
+                String text_one4
+                        = itemClassList.get(position).getText_one();
+
+                ((LayoutFourViewHolder)holder)
+                        .setViews(image4,text_one4);
+
+
+
+                ((LayoutFourViewHolder)holder)
+                        .constraintLayout.setOnClickListener(
+                        new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view)
+                            {
+
+                                Toast
+                                        .makeText(
+                                                view.getContext(),
+                                                "Hello from Layout Four!",
+                                                Toast.LENGTH_SHORT)
+                                        .show();
+                            }
+                        });
+                break;
+
             default:
                 return;
         }

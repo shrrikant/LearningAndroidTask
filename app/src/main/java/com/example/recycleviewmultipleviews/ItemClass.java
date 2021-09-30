@@ -2,6 +2,8 @@ package com.example.recycleviewmultipleviews;
 
 // ItemClass
 
+import java.net.URL;
+
 public class ItemClass {
 
     // Integers assigned to each layout
@@ -11,6 +13,7 @@ public class ItemClass {
     public static final int LayoutOne = 0;
     public static final int LayoutTwo = 1;
     public static final int LayoutThree = 2;
+    public static final int LayoutFour = 3;
 
     // This variable ViewType specifies
     // which out of the two layouts
@@ -45,6 +48,7 @@ public class ItemClass {
     private int icon;
     private int delete;
     private String text_one, text_two;
+    private URL image;
 
     // public constructor for the second layout
     public ItemClass(int viewType, int icon, int delete,String text_one,
@@ -59,6 +63,14 @@ public class ItemClass {
 
     // getter and setter methods for
     // the variables of the second layout
+
+    public URL getImage() {
+        return image;
+    }
+
+    public void setImage(URL image) {
+        this.image = image;
+    }
 
     public int geticon() { return icon; }
 
@@ -86,6 +98,13 @@ public class ItemClass {
 
     public void setViewType(int viewType)
     {
+        this.viewType = viewType;
+    }
+
+    public ItemClass(int viewType, URL image, String text_one)
+    {
+        this.image = image;
+        this.text_one = text_one;
         this.viewType = viewType;
     }
 }
