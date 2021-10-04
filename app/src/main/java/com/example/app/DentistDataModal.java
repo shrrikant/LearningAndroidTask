@@ -6,12 +6,8 @@ import com.google.gson.annotations.SerializedName;
 public class DentistDataModal {
 
     private int id;
-    @SerializedName("name")
-    @Expose
     private String name;
     private String shortName;
-    @SerializedName("image")
-    @Expose
     private String image;
     private String totalCourses;
 
@@ -52,14 +48,6 @@ public class DentistDataModal {
     }
 
     public void setTotalCourses(String totalCourses) {
-        this.totalCourses = totalCourses;
-    }
-
-    public DentistDataModal(int id, String name, String shortName, String image, String totalCourses) {
-        this.id = id;
-        this.name = name;
-        this.shortName = shortName;
-        this.image = image;
         this.totalCourses = totalCourses;
     }
 

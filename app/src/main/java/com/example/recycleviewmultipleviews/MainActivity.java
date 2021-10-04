@@ -58,70 +58,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         setupNavigation();
-        //bottomNavigationView = findViewById(R.id.bottomNavigationView);
-
-        //bottomNavigationView.setOnNavigationItemSelectedListener(this);
-        //bottomNavigationView.setSelectedItemId(R.id.person);
-        // From the MainActivity, find the RecyclerView.
-        /*recyclerView
-                = findViewById(R.id.recyclerView);
-        coordinatorLayout = findViewById(R.id.coordinatorLayout);
-        //getSupportActionBar().hide();
-        // Create and set the layout manager
-        // For the RecyclerView.
-        LinearLayoutManager layoutManager
-                = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-
-        List<ItemClass> itemClasses = new ArrayList<>();
-
-        // pass the arguments
-        itemClasses.add(new ItemClass(ItemClass.LayoutOne, R.drawable.trash,
-                "Item Type 1"));
-        itemClasses.add(new ItemClass(ItemClass.LayoutOne, R.drawable.trash,
-                "Item Type 1"));
-        itemClasses.add(new ItemClass(
-                ItemClass.LayoutTwo, R.drawable.login, R.drawable.trash,
-                "Item Type 2", "Text"));
-        itemClasses.add(new ItemClass(ItemClass.LayoutOne, R.drawable.trash,
-                "Item Type 1"));
-        itemClasses.add(new ItemClass(
-                ItemClass.LayoutTwo, R.drawable.signup, R.drawable.trash,
-                "Item Type 2", "Text"));
-        itemClasses.add(new ItemClass(
-                ItemClass.LayoutTwo, R.drawable.profile, R.drawable.trash,
-                "Item Type 2", "Text"));
-        itemClasses.add(new ItemClass(ItemClass.LayoutOne, R.drawable.trash,
-                "Item Type 1"));
-        itemClasses.add(new ItemClass(
-                ItemClass.LayoutTwo, R.drawable.dashboard, R.drawable.trash,
-                "Item Type 2", "Text"));
-        itemClasses.add(new ItemClass(
-                ItemClass.LayoutThree,
-                "Loading"));
-        AdapterClass adapterClass
-                = new AdapterClass(itemClasses);
-
-        adapter
-                = new AdapterClass(itemClasses);
-
-        // set the adapter
-        recyclerView.setAdapter(adapter);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                Toast.makeText(getApplicationContext(),
-                        "Hello from Layout Three!",
-                        Toast.LENGTH_LONG)
-                        .show();
-                //function(); //call function!
-                //adapterClass.removeItem(8);
-            }
-        }, TIME);
-*/
-        //enableSwipeToDeleteAndUndo();
 
     }
 
@@ -140,20 +76,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavHostFragment navHostFragment =
                 (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
 
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        /*mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.first, R.id.second, R.id.third,
-                R.id.fourth)
-                .setDrawerLayout(drawerLayout)
-                .build();*/
-
         navController = navHostFragment.getNavController();
 
         NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout);
-        //navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-
-        //NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout);
 
         NavigationUI.setupWithNavController(navigationView, navController);
         NavigationUI.setupWithNavController(bottomNavView, navController);

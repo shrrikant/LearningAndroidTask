@@ -10,10 +10,7 @@ public class DentistModal {
 
     private int status;
     private String message;
-    @SerializedName("dentistdata")
-    @Expose
-    private List<DentistDataModal> dentistdata = new ArrayList<>();
-
+    private ArrayList<DentistDataModal> data;
     private int total;
     private int count;
     private int currentPage;
@@ -32,14 +29,6 @@ public class DentistModal {
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public List<DentistDataModal> getDentistdata() {
-        return dentistdata;
-    }
-
-    public void setDentistdata(List<DentistDataModal> dentistdata) {
-        this.dentistdata = dentistdata;
     }
 
     public int getTotal() {
@@ -66,15 +55,10 @@ public class DentistModal {
         this.currentPage = currentPage;
     }
 
-    public DentistModal(int status, String message, List<DentistDataModal> dentistdata, int total, int count, int currentPage) {
-        this.status = status;
-        this.message = message;
-        this.dentistdata = dentistdata;
-        this.total = total;
-        this.count = count;
-        this.currentPage = currentPage;
+    public DentistModal() {
     }
 
-    public DentistModal() {
+    public ArrayList<DentistDataModal> getData() {
+        return data;
     }
 }

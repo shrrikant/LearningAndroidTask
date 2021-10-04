@@ -17,10 +17,10 @@ import java.util.ArrayList;
 public class AdapterLanding extends RecyclerView.Adapter<AdapterLanding.Viewholder> {
 
     private Context context;
-    private ArrayList<DataModel> dataModelArrayList;
+    private ArrayList<DentistDataModal> dataModelArrayList;
 
     // Constructor
-    public AdapterLanding(Context context, ArrayList<DataModel> dataModelArrayList) {
+    public AdapterLanding(Context context, ArrayList<DentistDataModal> dataModelArrayList) {
         this.context = context;
         this.dataModelArrayList = dataModelArrayList;
     }
@@ -36,8 +36,10 @@ public class AdapterLanding extends RecyclerView.Adapter<AdapterLanding.Viewhold
     @Override
     public void onBindViewHolder(@NonNull AdapterLanding.Viewholder holder, int position) {
         // to set data to textview and imageview of each card layout
-        DataModel model = dataModelArrayList.get(position);
+        DentistDataModal model = dataModelArrayList.get(position);
         holder.dataName.setText(model.getName());
+        holder.shortDataName.setText(model.getShortName());
+        holder.totalCourses.setText(model.getTotalCourses());
         Glide.with(context).load(model.getImage()).into(holder.dataImage);
     }
 
@@ -53,11 +55,15 @@ public class AdapterLanding extends RecyclerView.Adapter<AdapterLanding.Viewhold
     public class Viewholder extends RecyclerView.ViewHolder {
         private ImageView dataImage;
         private TextView dataName;
+        private TextView shortDataName;
+        private TextView totalCourses;
 
         public Viewholder(@NonNull View itemView) {
             super(itemView);
             dataImage = itemView.findViewById(R.id.media_image);
-            dataName = itemView.findViewById(R.id.textView);
+            dataName = itemView.findViewById(R.id.head_name);
+            shortDataName = itemView.findViewById(R.id.short_name);
+            totalCourses = itemView.findViewById(R.id.total_courses);
 
         }
     }
