@@ -1,5 +1,11 @@
 package com.example.app;
 
+import android.widget.ImageView;
+
+import androidx.databinding.BindingAdapter;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -49,6 +55,13 @@ public class DentistDataModal {
 
     public void setTotalCourses(String totalCourses) {
         this.totalCourses = totalCourses;
+    }
+
+    @BindingAdapter("image")
+    public static void loadImage(ImageView view, String imageUrl) {
+        Glide.with(view.getContext())
+                .load(imageUrl)
+                .into(view);
     }
 
     public DentistDataModal() {
