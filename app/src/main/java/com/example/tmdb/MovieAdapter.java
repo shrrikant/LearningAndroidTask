@@ -22,28 +22,28 @@ import com.example.tmdb.model.TmdbMovie;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovieListAdapter extends RecyclerView.Adapter<com.example.tmdb.MovieListAdapter.Viewholder> {
+public class MovieAdapter extends RecyclerView.Adapter<com.example.tmdb.MovieAdapter.Viewholder> {
 
     private Context context;
     private List<TmdbMovie> dataModelArrayList;
 
     // Constructor
-    public MovieListAdapter(Context context, List<TmdbMovie> dataModelArrayList) {
+    public MovieAdapter(Context context, List<TmdbMovie> dataModelArrayList) {
         this.context = context;
         this.dataModelArrayList = dataModelArrayList;
     }
 
     @NonNull
     @Override
-    public com.example.tmdb.MovieListAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public com.example.tmdb.MovieAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // to inflate the layout for each item of recycler view.
         //View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_layout, parent, false);
         ActivityMovieListBinding view = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.activity_movie_list, parent, false);
-        return new com.example.tmdb.MovieListAdapter.Viewholder(view);
+        return new com.example.tmdb.MovieAdapter.Viewholder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull com.example.tmdb.MovieListAdapter.Viewholder holder, int position) {
+    public void onBindViewHolder(@NonNull com.example.tmdb.MovieAdapter.Viewholder holder, int position) {
         // to set data to textview and imageview of each card layout
         TmdbMovie model = dataModelArrayList.get(position);
         holder.bind(model);

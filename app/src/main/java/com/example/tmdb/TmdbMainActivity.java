@@ -49,7 +49,7 @@ public class TmdbMainActivity extends AppCompatActivity {
                     .build();
         }
         MovieApiService movieApiService = retrofit.create(MovieApiService.class);
-        Call<Tmdb> call = movieApiService.getMovie(API_KEY);
+        Call<Tmdb> call = movieApiService.getMovies(API_KEY);
         call.enqueue(new Callback<Tmdb>() {
             @Override
             public void onResponse(Call<Tmdb> call, Response<Tmdb> response) {

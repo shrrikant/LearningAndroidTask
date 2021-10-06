@@ -4,8 +4,33 @@ import java.util.List;
 
 public class TmdbMovie {
 
+    public BelongsToCollection belongs_to_collection;
+
+    public Integer budget;
+
+    public List<Genre> genres = null;
+
+    public String homepage;
+
+    public String imdb_id;
+
+    public List<ProductionCompany> production_companies = null;
+
+    public List<ProductionCountry> production_countries = null;
+
+
+    public Integer revenue;
+
+    public Integer runtime;
+
+    public List<SpokenLanguage> spoken_languages = null;
+
+
 
     public Boolean adult;
+
+    public String tagline;
+    public String status;
 
     public String backdrop_path;
 
@@ -143,5 +168,102 @@ public class TmdbMovie {
 
     public void setVote_count(Integer vote_count) {
         this.vote_count = vote_count;
+    }
+
+
+    public BelongsToCollection getBelongs_to_collection() {
+        return belongs_to_collection;
+    }
+
+    public void setBelongs_to_collection(BelongsToCollection belongs_to_collection) {
+        this.belongs_to_collection = belongs_to_collection;
+    }
+
+    public Integer getBudget() {
+        return budget;
+    }
+
+    public void setBudget(Integer budget) {
+        this.budget = budget;
+    }
+
+    public List<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<Genre> genres) {
+        this.genres = genres;
+    }
+
+    public String getHomepage() {
+        return homepage;
+    }
+
+    public void setHomepage(String homepage) {
+        this.homepage = homepage;
+    }
+
+    public String getImdb_id() {
+        return imdb_id;
+    }
+
+    public void setImdb_id(String imdb_id) {
+        this.imdb_id = imdb_id;
+    }
+
+    public List<ProductionCompany> getProduction_companies() {
+        return production_companies;
+    }
+
+    public void setProduction_companies(List<ProductionCompany> production_companies) {
+        this.production_companies = production_companies;
+    }
+
+    public List<ProductionCountry> getProduction_countries() {
+        return production_countries;
+    }
+
+    public void setProduction_countries(List<ProductionCountry> production_countries) {
+        this.production_countries = production_countries;
+    }
+
+    public Integer getRevenue() {
+        return revenue;
+    }
+
+    public void setRevenue(Integer revenue) {
+        this.revenue = revenue;
+    }
+
+    public Integer getRuntime() {
+        return runtime;
+    }
+
+    public void setRuntime(Integer runtime) {
+        this.runtime = runtime;
+    }
+
+    public List<SpokenLanguage> getSpoken_languages() {
+        return spoken_languages;
+    }
+
+    public void setSpoken_languages(List<SpokenLanguage> spoken_languages) {
+        this.spoken_languages = spoken_languages;
+    }
+
+    public String getTagline() {
+        return tagline;
+    }
+
+    public void setTagline(String tagline) {
+        this.tagline = tagline;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
