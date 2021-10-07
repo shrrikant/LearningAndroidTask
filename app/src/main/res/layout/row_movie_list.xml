@@ -18,6 +18,14 @@
         app:cardUseCompatPadding="true"
         >
 
+        <ProgressBar
+            android:id="@+id/movie_progress"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="@dimen/activity_margin"
+            android:layout_height="@dimen/activity_margin"
+            android:layout_gravity="center"
+            android:theme="@style/CircularProgress"/>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

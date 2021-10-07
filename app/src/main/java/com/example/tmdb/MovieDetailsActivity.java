@@ -1,18 +1,32 @@
 package com.example.tmdb;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 
+import com.bumptech.glide.Glide;
+import com.example.app.DentistDataModal;
+import com.example.recycleviewmultipleviews.HomeActivity;
 import com.example.recycleviewmultipleviews.R;
 import com.example.recycleviewmultipleviews.databinding.ActivityMovieBinding;
+import com.example.tmdb.model.Genre;
 import com.example.tmdb.model.Tmdb;
 import com.example.tmdb.model.TmdbMovie;
 
+import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -36,6 +50,18 @@ public class MovieDetailsActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_movie);
         //setContentView(R.layout.activity_movie_details);
 
+        // calling the action bar
+        ActionBar actionBar = getSupportActionBar();
+        /*ColorDrawable colorDrawable
+                = new ColorDrawable(Color.WHITE);
+
+        // Set BackgroundDrawable
+        actionBar.setBackgroundDrawable(colorDrawable);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitleTextColor(Color.BLACK);*/
+        // showing the back button in action bar
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             movie_id = extras.getInt("movie_id", 0);
@@ -43,6 +69,19 @@ public class MovieDetailsActivity extends AppCompatActivity {
         }
 
         connect();
+    }
+
+    // this event will enable the back
+    // function to the button on press
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(getApplicationContext(), TmdbMainActivity.class);
+                startActivity(intent);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void connect() {
@@ -62,9 +101,21 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
                     TmdbMovie tmdbMovie = new TmdbMovie();
                     tmdbMovie = response.body();
-
+                    Log.i(TAG, "onResponse: i" +tmdbMovie.toString());
                     binding.setModel(tmdbMovie);
-                    //binding.title.setText(tmdbMovieList.title);
+
+                    String image = "";
+                    image = "https://image.tmdb.org/t/p/w500" + tmdbMovie.getPoster_path();
+                    Glide.with(getApplicationContext()).load(image).into(binding.poster);
+
+                    String genres="";
+                    List<Genre> genreArrayList = new ArrayList<>();
+                    genreArrayList = tmdbMovie.getGenres();
+                    for (Genre i : genreArrayList) {
+                        genres += i.name +", ";
+                    }
+
+                    binding.genres.setText(genres.substring(0, genres.length() - 2));
                 }
                 //Log.i(TAG, tmdbMovieList.toString());
 

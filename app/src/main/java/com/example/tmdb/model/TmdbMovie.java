@@ -1,61 +1,36 @@
 package com.example.tmdb.model;
 
+import android.text.TextUtils;
+
 import java.util.List;
 
 public class TmdbMovie {
 
     public BelongsToCollection belongs_to_collection;
-
     public Integer budget;
-
     public List<Genre> genres = null;
-
     public String homepage;
-
     public String imdb_id;
-
     public List<ProductionCompany> production_companies = null;
-
     public List<ProductionCountry> production_countries = null;
-
-
     public Integer revenue;
-
     public Integer runtime;
-
     public List<SpokenLanguage> spoken_languages = null;
-
-
-
     public Boolean adult;
-
     public String tagline;
     public String status;
-
     public String backdrop_path;
-
     public List<Integer> genre_ids = null;
-
     public Integer id;
-
     public String original_language;
-
     public String original_title;
-
     public String overview;
-
     public Double popularity;
-
     public String poster_path;
-
     public String release_date;
-
     public String title;
-
     public Boolean video;
-
     public Double vote_average;
-
     public Integer vote_count;
 
     public Boolean getAdult() {
@@ -162,8 +137,8 @@ public class TmdbMovie {
         this.vote_average = vote_average;
     }
 
-    public Integer getVote_count() {
-        return vote_count;
+    public String getVote_count() {
+        return vote_count.toString();
     }
 
     public void setVote_count(Integer vote_count) {
@@ -188,6 +163,7 @@ public class TmdbMovie {
     }
 
     public List<Genre> getGenres() {
+
         return genres;
     }
 
@@ -252,6 +228,11 @@ public class TmdbMovie {
     }
 
     public String getTagline() {
+
+        if(TextUtils.equals(tagline,""))
+            return " ";
+        else
+
         return tagline;
     }
 
