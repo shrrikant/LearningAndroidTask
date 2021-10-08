@@ -85,107 +85,6 @@ public class TmdbMainActivity extends AppCompatActivity {
 
         binding.setMyAdapter(movieAdapter);
 
-        binding.mainProgress.setVisibility(View.VISIBLE);
-
-
-        //init service and load data
-        //movieService = MovieApi.getClient().create(MovieService.class);
-
-        loadFirstPage();
-
-    }
-
-    // this event will enable the back
-    // function to the button on press
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                startActivity(intent);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    /*private void connect() {
-        if (retrofit == null) {
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-        }
-        MovieApiService movieApiService = retrofit.create(MovieApiService.class);
-        Call<Tmdb> call = movieApiService.getMovies(API_KEY, page);
-        call.enqueue(new Callback<Tmdb>() {
-            @Override
-            public void onResponse(Call<Tmdb> call, Response<Tmdb> response) {
-
-                List<TmdbMovie> tmdbMovieList = response.body().results;
-                Log.i(TAG, tmdbMovieList.toString());
-                setMovieAdapter(tmdbMovieList);
-
-            }
-
-            @Override
-            public void onFailure(Call<Tmdb> call, Throwable throwable) {
-                Log.e(TAG, throwable.toString());
-            }
-        });
-    }*/
-
-    /*private void setMovieAdapter(List<TmdbMovie> tmdbMovieList) {
-        binding.setMyAdapter(movieAdapter);
-
-    }*/
-
-    private void loadFirstPage() {
-        Log.d(TAG, "loadFirstPage: ");
-
-        if (retrofit == null) {
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-        }
-        MovieApiService movieApiService = retrofit.create(MovieApiService.class);
-        Call<Tmdb> call = movieApiService.getMovies(API_KEY, currentPage);
-        call.enqueue(new Callback<Tmdb>() {
-            @Override
-            public void onResponse(Call<Tmdb> call, Response<Tmdb> response) {
-
-                tmdbMovieList = response.body().results;
-                Log.i(TAG, tmdbMovieList.toString());
-                //if(progressBar!=null)
-                binding.mainProgress.setVisibility(View.GONE);
-                movieAdapter.addAll(tmdbMovieList);
-                setMovieAdapter(tmdbMovieList);
-
-                if (currentPage <= TOTAL_PAGES) movieAdapter.addLoadingFooter();
-                else isLastPage = true;
-            }
-
-            @Override
-            public void onFailure(Call<Tmdb> call, Throwable throwable) {
-                Log.e(TAG, throwable.toString());
-            }
-        });
-
-    }
-
-    private void setMovieAdapter(List<TmdbMovie> tmdbMovieList) {
-
-        // we are initializing our adapter class and passing our arraylist to it.
-        MovieListAdapter movieAdapter = new MovieListAdapter(this, tmdbMovieList);
-
-        // below line is for setting a layout manager for our recycler view.
-        // here we are creating vertical list so we will provide orientation as vertical
-        gridLayoutManager = new GridLayoutManager(this, 2);
-
-        // in below two lines we are setting layoutmanager and adapter to our recycler view.
-        binding.movieRecyclerView.setLayoutManager(gridLayoutManager);
-        binding.setMyAdapter(movieAdapter);
-
         binding.movieRecyclerView.addOnScrollListener(new PaginationScrollListener(gridLayoutManager) {
             @Override
             protected void loadMoreItems() {
@@ -216,6 +115,55 @@ public class TmdbMainActivity extends AppCompatActivity {
                 return isLoading;
             }
         });
+
+        if (retrofit == null) {
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+
+        loadFirstPage();
+
+    }
+
+    // this event will enable the back
+    // function to the button on press
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivity(intent);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void loadFirstPage() {
+        Log.d(TAG, "loadFirstPage: ");
+
+        MovieApiService movieApiService = retrofit.create(MovieApiService.class);
+        Call<Tmdb> call = movieApiService.getMovies(API_KEY, currentPage);
+        call.enqueue(new Callback<Tmdb>() {
+            @Override
+            public void onResponse(Call<Tmdb> call, Response<Tmdb> response) {
+
+                tmdbMovieList = response.body().results;
+                Log.i(TAG, tmdbMovieList.toString());
+                binding.mainProgress.setVisibility(View.GONE);
+                movieAdapter.addAll(tmdbMovieList);
+
+                if (currentPage <= TOTAL_PAGES) movieAdapter.addLoadingFooter();
+                else isLastPage = true;
+            }
+
+            @Override
+            public void onFailure(Call<Tmdb> call, Throwable throwable) {
+                Log.e(TAG, throwable.toString());
+            }
+        });
+
     }
 
     private List<TmdbMovie> fetchResults(Response<Tmdb> response) {
@@ -226,12 +174,6 @@ public class TmdbMainActivity extends AppCompatActivity {
     private void loadNextPage() {
         Log.d(TAG, "loadNextPage: " + currentPage);
 
-        if (retrofit == null) {
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-        }
         MovieApiService movieApiService = retrofit.create(MovieApiService.class);
         Call<Tmdb> call = movieApiService.getMovies(API_KEY, currentPage);
         call.enqueue(new Callback<Tmdb>() {
@@ -242,16 +184,12 @@ public class TmdbMainActivity extends AppCompatActivity {
                 isLoading = false;
 
                 List<TmdbMovie> results = fetchResults(response);
-                for (TmdbMovie result : results) {
-                    tmdbMovieList.add(result);
-                }
 
-                //tmdbMovieList = response.body().results;
-                Log.i(TAG, tmdbMovieList.toString());
-                //if(progressBar!=null)
+                Log.i(TAG, results.toString());
+
                 binding.mainProgress.setVisibility(View.GONE);
-                movieAdapter.addAll(tmdbMovieList);
-                setMovieAdapter(tmdbMovieList);
+                movieAdapter.addAll(results);
+
 
                 if (currentPage != TOTAL_PAGES) movieAdapter.addLoadingFooter();
                 else isLastPage = true;
