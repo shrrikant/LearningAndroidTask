@@ -37,8 +37,6 @@
                 android:layout_height="300dp"
                 android:scaleType="fitXY"
 
-                android:src="@{model.poster_path}"
-
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent" />

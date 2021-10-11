@@ -44,7 +44,7 @@ public class TmdbMainActivity extends AppCompatActivity {
     final static String API_KEY = "079ab243592a5951f8c22cff6482f258";
     private ActivityTmdbMainBinding binding;
     ProgressBar progressBar;
-    MovieListAdapter movieAdapter;
+    PaginationAdapter movieAdapter;
     GridLayoutManager gridLayoutManager;
     private static final int PAGE_START = 1;
     private boolean isLoading = false;
@@ -73,7 +73,7 @@ public class TmdbMainActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_tmdb_main);
         //connect();
 // we are initializing our adapter class and passing our arraylist to it.
-        movieAdapter = new MovieListAdapter(this);
+        movieAdapter = new PaginationAdapter(this);
 
         // below line is for setting a layout manager for our recycler view.
         // here we are creating vertical list so we will provide orientation as vertical
